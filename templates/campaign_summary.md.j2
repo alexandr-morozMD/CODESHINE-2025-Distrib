@@ -1,0 +1,47 @@
+# Company: {{ project_title }}
+
+## Meeting Summary
+{{ meeting_summary or brief }}
+
+{% if normalized_transcript %}
+## Normalized Transcript
+{{ normalized_transcript }}
+{% endif %}
+
+{% if audio_path %}
+> Original audio file: `{{ audio_path }}`
+{% endif %}
+
+## Final Plan
+{{ plan_markdown }}
+
+{% if agent_sections %}
+## Agent Reports
+{% for section in agent_sections %}
+### {{ section.title }}
+{{ section.body }}
+{% endfor %}
+{% else %}
+{% if icp_markdown %}
+### ICP
+{{ icp_markdown }}
+{% endif %}
+{% if concepts_markdown %}
+### Concepts
+{{ concepts_markdown }}
+{% endif %}
+{% if copy_markdown %}
+### Copywriting
+{{ copy_markdown }}
+{% endif %}
+{% endif %}
+
+{% if todo_items %}
+## Implementation Checklist
+{% for item in todo_items %}- [{{ 'x' if item.done else ' ' }}] {{ item.text }}
+{% endfor %}
+{% endif %}
+
+---
+
+Generated {{ timestamp }}.
